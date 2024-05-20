@@ -24,8 +24,6 @@ export function AddPetModal() {
     }
   }
 
-
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -36,6 +34,10 @@ export function AddPetModal() {
     const formData = new FormData(event.target);
 
     const ageValue = formData.get('age');
+    if(!ageValue) {
+      toast.error('Please fill out all fields')
+      throw new Error('Missing fields')
+    }
     let age: number | null = null;
 
     if (typeof ageValue === 'string') {
@@ -49,9 +51,15 @@ export function AddPetModal() {
       photo: photo
     };
 
+    if(!newData.name || !newData.breed) {
+      toast.error('Please fill out all fields')
+      throw new Error('Missing fields')
+    }
+
+
     async function uploadPhoto(newData: { name: string; breed: string; age?: FormDataEntryValue | null; photo: never; }) {
       if (newData.photo) {
-        const { data, error } = await supabase.storage.from('pet_images').upload(`${newData.name}-${newData.breed}.png`, newData.photo)
+        const { data, error } = await supabase.storage.from('pet_images').upload(`${newData.name}-${newData.breed}-${new Date().toLocaleTimeString()}.png`, newData.photo)
         if (error) {
           toast.error('Failed to upload photo')
           throw new Error(error.message)
