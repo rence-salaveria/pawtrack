@@ -71,6 +71,8 @@ export function EditPetModal(props: Props) {
         return null;
       }
 
+      toast.success("Edited record successfully");
+
       navigate('/reload');
       setTimeout(() => {
         navigate(location.pathname);
