@@ -14,8 +14,12 @@ import {Input} from "@/components/ui/input.tsx";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
 import {supabase} from "@/lib/supabase.ts";
 import toast from "react-hot-toast";
+import { useNavigate, useLocation } from 'react-router-dom';
+
 
 function AddDietPlanModal({petId} : {petId: number | undefined}) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const calculateCalorieIntake = (weight: number) => {
     if (weight <= 4.5) {
       return 400;
@@ -115,7 +119,10 @@ function AddDietPlanModal({petId} : {petId: number | undefined}) {
       return;
     } else {
       console.log(data);
-      window.location.reload();
+      navigate('/reload');
+      setTimeout(() => {
+        navigate(location.pathname);
+      });
     }
   }
 
