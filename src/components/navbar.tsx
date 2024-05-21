@@ -28,6 +28,9 @@ export function Navbar({type}: { type: 'auth' | 'guest' }) {
           <Link to="/" className="text-sm font-medium hover:underline underline-offset-4 ml-4">
             Home
           </Link>
+          <a href="/#about" className="text-sm font-medium hover:underline underline-offset-4 ml-4">
+            About
+          </a>
           <Link to="/contact" className="text-sm font-medium hover:underline underline-offset-4 ml-4">
             Contact
           </Link>

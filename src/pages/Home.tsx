@@ -10,7 +10,7 @@ function Home() {
       <main className="flex flex-col items-center justify-center min-h-screen-minus-navbar" id="">
         <HomeHeroSection/>
         <Link to="/contact">
-          <img src="/about.png" alt=""/>
+          <img src="/about.png" alt="" id="about"/>
         </Link>
         <a href="#top">
           <img src="/hero2.png" alt=""/>
