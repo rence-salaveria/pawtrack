@@ -12,14 +12,23 @@ function Dashboard() {
     async function getPets() {
       const { data: { user } } = await supabase.auth.getUser()
 
-      const response = await supabase
-        .from('pets')
-        .select('*')
-        .eq('owner_id', user!.id);
+      if (user?.email === "admin@admin.com") {
 
-      const pets = response.data as Pet[];
+        const response = await supabase
+          .from('pets')
+          .select('*');
 
-      setPets(pets)
+        const pets = response.data as Pet[];
+        setPets(pets)
+      } else {
+        const response = await supabase
+          .from('pets')
+          .select('*')
+          .eq('owner_id', user!.id);
+
+        const pets = response.data as Pet[];
+        setPets(pets)
+      }
     }
 
     getPets().then(() => {})

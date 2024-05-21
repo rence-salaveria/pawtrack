@@ -1,14 +1,59 @@
 import {Button} from "@/components/ui/button"
 import {TableHead, TableRow, TableHeader, TableCell, TableBody, Table} from "@/components/ui/table"
 import {Pet} from "@/lib/types.ts";
-import {Link} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {AddPetModal} from "@/components/add-pet-modal.tsx";
+import {useEffect, useState} from "react";
+import {supabase} from "@/lib/supabase.ts";
+import {User} from "@supabase/supabase-js";
+import toast from "react-hot-toast";
+import {EditPetModal} from "@/components/edit-pet-modal.tsx";
 
 type Props = {
-  pets: Pet[]
+  pets: Pet[],
 }
 
 export function PetTable(props: Props) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  useEffect(() => {
+    async function getUser() {
+      const {data: {user}} = await supabase.auth.getUser()
+      setCurrentUser(user);
+    }
+
+    getUser().then(() => {
+    })
+  }, []);
+
+  useEffect(() => {
+    console.log(currentUser)
+  }, [currentUser]);
+
+  async function deletePet(petId: number) {
+    try {
+      const { error } = await supabase
+        .from('pets')
+        .delete()
+        .eq('id', petId);
+
+      if (error) {
+        toast.error("Failed to delete a record")
+        return null;
+      }
+
+      toast.success("Deleted record along with diet plans")
+      navigate('/reload');
+      setTimeout(() => {
+        navigate(location.pathname);
+      });
+    } catch (error) {
+      console.error('Unexpected error deleting pet: ', error);
+      return null;
+    }
+  }
+
   return (
     <div className="w-full p-4">
       <div className="p-4 flex items-center justify-between">
@@ -43,6 +88,14 @@ export function PetTable(props: Props) {
                           View
                         </Link>
                       </Button>
+                      {currentUser?.email === "admin@admin.com" && (
+                        <>
+                          <EditPetModal pet={pet}/>
+                          <Button size="sm" variant="outline" onClick={() => deletePet(pet.id)}>
+                            Delete
+                          </Button>
+                        </>
+                      )}
                     </TableCell>
                   </TableRow>
                 )

@@ -45,9 +45,6 @@ export function Navbar({type}: { type: 'auth' | 'guest' }) {
           <Link to="/u/pets" className="text-sm font-medium hover:underline underline-offset-4 ml-4">
             Pets
           </Link>
-          <Link to="/contact" className="text-sm font-medium hover:underline underline-offset-4 ml-4">
-            Contact
-          </Link>
         </div>
       </nav>
       <Link to="/logout" className="text-sm font-medium hover:underline underline-offset-4 ml-4">
