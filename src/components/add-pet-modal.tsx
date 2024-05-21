@@ -13,8 +13,11 @@ import { Input } from "@/components/ui/input"
 import React, {useState} from "react";
 import {supabase} from "@/lib/supabase.ts";
 import toast from "react-hot-toast";
+import {useLocation, useNavigate} from "react-router-dom";
 
 export function AddPetModal() {
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [photo, setPhoto] = useState<File | null>(null)
 
@@ -87,7 +90,10 @@ export function AddPetModal() {
     if (error) {
       toast.error('Failed to add pet')
     } else {
-      window.location.reload()
+      navigate('/reload');
+      setTimeout(() => {
+        navigate(location.pathname);
+      });
     }
   };
 
