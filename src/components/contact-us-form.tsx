@@ -70,14 +70,9 @@ export function ContactUsForm() {
               <h2 className="text-2xl font-bold tracking-tight">Our headquarters</h2>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <h3 className="text-lg font-medium">San Francisco</h3>
-                  <p className="text-gray-500 dark:text-gray-400">123 Main St, San Francisco, CA 94105</p>
+                  <h3 className="text-lg font-medium">Philippines</h3>
+                  <p className="text-gray-500 dark:text-gray-400">Meycauayan Bulacan</p>
                   <p className="text-gray-500 dark:text-gray-400">Phone: (123) 456-7890</p>
-                </div>
-                <div className="space-y-2">
-                  <h3 className="text-lg font-medium">New York</h3>
-                  <p className="text-gray-500 dark:text-gray-400">456 Broadway, New York, NY 10013</p>
-                  <p className="text-gray-500 dark:text-gray-400">Phone: (987) 654-3210</p>
                 </div>
               </div>
               <div className="aspect-video w-full overflow-hidden rounded-lg">

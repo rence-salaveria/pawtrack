@@ -77,7 +77,7 @@
 }
 
 body {
-    @apply min-h-screen bg-gradient-to-b from-[#FFFFFF] to-[#84DCC6] text-black
+    @apply min-h-screen bg-gradient-to-b from-[#ffffff] to-[#FFFFFF] text-black
 }
 
 .min-h-screen-minus-navbar {

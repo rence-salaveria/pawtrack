@@ -18,7 +18,7 @@ export function Navbar({type}: { type: 'auth' | 'guest' }) {
   }
 
   return type === 'guest' ? (
-    <header key="1" className="flex h-16 items-center justify-between px-4 md:px-6">
+    <header key="1" className="flex h-16 items-center justify-between px-4 md:px-6" id="top">
       <Link className="flex items-center gap-2 text-lg font-semibold" to="/">
         <LuDog className="w-8 h-8 text-primary-500"/>
         <span className="">Pawtrack</span>
